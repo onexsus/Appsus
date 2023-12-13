@@ -1,1 +1,14 @@
  /* note list */
+
+ .note {
+
+    margin: 1em;
+    padding: 1em;
+    
+    border: 1px solid darkgray;
+    background-color: ivory;
+
+    text-align: center;
+
+    gap: 1em;
+ }
