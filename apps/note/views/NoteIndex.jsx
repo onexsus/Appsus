@@ -7,7 +7,7 @@ export function NoteIndex() {
 
 
     return <div>
-        <h1>note app</h1>
+        <h1>Note app</h1>
         {/* < NoteList /> */}
     </div>
 }
