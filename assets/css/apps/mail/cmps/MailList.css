@@ -20,7 +20,7 @@
   text-align: start;
   align-items: center;
 } 
-.email-title{
+.email-user{
    font-weight: 600;
  }
  .email-body{
@@ -31,9 +31,14 @@
  }
  .text-truncate {
    overflow: hidden;
-  width: 100%; /* Adjust as necessary, can be a specific value like 200px or 100% for full width */
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.read{
+
+}
+.unread{
+
 }
 /* 
 email-title

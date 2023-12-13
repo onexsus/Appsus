@@ -16,10 +16,25 @@ export function MailIndex() {
       .then((emails) => setEmails(emails))
       .catch((err) => console.log("err:", err));
   }
+  function onAddEmail(){
+
+  }
+  
+  function onRemoveToTrash(){
+    
+  }
+
+  function onRemove(){
+
+  }
 
   if (!emails) return <div>Loading...</div>;
   return(
     <section>
+      <section className="email-header">
+      <div className="email-logo"><img src="../../../assets/img/bk-email-logo.png"/></div>
+      <button>Menu</button>
+    </section>
         <div>mail app</div>
         <MailList emails={emails}/>
     </section>
