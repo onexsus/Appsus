@@ -3,6 +3,7 @@ import { EmailPreview } from "./EmailPreview.jsx"
 export function MailList({emails}) {
 
     return (<section className="main-list">
+        
         <h2>Mail list</h2>
         <ul className="email-list clean-list">
 
