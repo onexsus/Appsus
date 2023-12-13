@@ -6,6 +6,8 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    saveToStorage,
+    loadFromStorage,
 }
 
 function makeId(length = 6) {
@@ -27,6 +29,15 @@ function makeLorem(size = 100) {
         txt += words[Math.floor(Math.random() * words.length)] + ' '
     }
     return txt
+}
+
+function saveToStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+function loadFromStorage(key) {
+    const data = localStorage.getItem(key)
+    return (data) ? JSON.parse(data) : undefined
 }
 
 function getRandomIntInclusive(min, max) {
@@ -55,8 +66,11 @@ function getDayName(date, locale) {
 
 
 function getMonthName(date) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+    // const monthNames = ["January", "February", "March", "April", "May", "June",
+    //     "July", "August", "September", "October", "November", "December"
+    // ]
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ]
     return monthNames[date.getMonth()]
 }
