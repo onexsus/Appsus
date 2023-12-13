@@ -1,3 +1,6 @@
+import { utilService } from './util.service.js'
+
+
 export const storageService = {
     query,
     get,
@@ -5,9 +8,67 @@ export const storageService = {
     put,
     remove,
 }
+
+const defaultNotes = [
+    {
+        id: 'n101',
+        type: 'NoteTxt',
+        isPinned: true,
+        style: { backgroundColor: '#ffadad' },
+        info: {
+            txt: 'Fullstack Me Baby!'
+        }
+    },
+    {
+        id: 'n102',
+        type: 'NoteImg',
+        isPinned: false,
+        style: { backgroundColor: '#ffd6a5' },
+        info: {
+            title: 'Bobi and Me',
+            url: 'http://some-img-url/me.jpg'
+        }
+    },
+    {
+        id: 'n103',
+        type: 'NoteTodos',
+        isPinned: false,
+        style: { backgroundColor: '#fdffb6' },
+        info: {
+            title: 'Get my stuff together',
+            todos: [
+                { txt: 'Driving license', doneAt: null },
+                { txt: 'Coding power', doneAt: 187111111 }
+            ]
+        }
+    },
+    {
+        id: 'n104',
+        type: 'NoteTxt',
+        isPinned: false,
+        style: { backgroundColor: '#caffbf' },
+        info: {
+            txt: 'Remember to buy milk'
+        }
+    },
+    // Add more notes as needed
+];
+
+function initDefaultData() {
+    let entities = JSON.parse(localStorage.getItem('noteDB')) || [];
+    if (!entities.length) {
+        defaultNotes.forEach(note => {
+            note.id = note.id || _makeId();
+            entities.push(note);
+        });
+        _save('noteDB', entities);
+    }
+}
+
 function query(entityType, delay = 500) {
-    var entities = JSON.parse(localStorage.getItem(entityType)) || []
-    return new Promise(resolve => setTimeout(() => resolve(entities), delay))
+    initDefaultData();  // Initialize default data if needed
+    var entities = JSON.parse(localStorage.getItem(entityType)) || [];
+    return new Promise(resolve => setTimeout(() => resolve(entities), delay));
 }
 
 function get(entityType, entityId) {
@@ -18,9 +79,10 @@ function get(entityType, entityId) {
     })
 }
 
+
 function post(entityType, newEntity) {
-    newEntity = {...newEntity}
-    newEntity.id = _makeId()
+    newEntity = { ...newEntity }
+    newEntity.id = utilService.makeId() // Using makeId from utilService
     return query(entityType).then(entities => {
         entities.push(newEntity)
         _save(entityType, entities)
@@ -51,13 +113,4 @@ function remove(entityType, entityId) {
 
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
-}
-
-function _makeId(length = 5) {
-    var text = ''
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length))
-    }
-    return text
 }
