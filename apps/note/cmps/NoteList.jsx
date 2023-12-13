@@ -1,15 +1,20 @@
+import { noteService } from '../../note/services/note.service.js'
 import { NotePreview } from "../../note/cmps/NotePreview.jsx"
 
 const { Link } = ReactRouterDOM
 
-export function NoteList({ notes, onRemoveNote }) {
+export function NoteList({ notes }) {
+
+    console.log(notes);
+
+    // export function NoteList({ notes, onRemoveNote }) {
 
     const ulProps = {
         className: "note-list",
         title: 'NOTELISTTTTTTTTTTTT'
     }
 
-    console.log(ulProps)
+    // console.log(ulProps)
 
     return <div>
         <h2>Note list</h2>
@@ -28,5 +33,6 @@ export function NoteList({ notes, onRemoveNote }) {
             )}
 
         </ul>
+
     </div>
 }

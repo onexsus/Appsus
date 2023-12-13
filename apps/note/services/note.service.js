@@ -1,18 +1,5 @@
 // note service
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// import { storageService } from '../../../services/async-storage.service.js'
 
 const notes = [
     {
@@ -52,3 +39,7 @@ const notes = [
         }
     }
 ]
+
+export const noteService = {
+notes,
+}
