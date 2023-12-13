@@ -1,4 +1,3 @@
-import { noteService } from '../../note/services/note.service.js'
 import { NotePreview } from "../../note/cmps/NotePreview.jsx"
 
 const { Link } = ReactRouterDOM
@@ -7,21 +6,12 @@ export function NoteList({ notes }) {
 
     console.log(notes);
 
-    // export function NoteList({ notes, onRemoveNote }) {
-
-    const ulProps = {
-        className: "note-list",
-        title: 'NOTELISTTTTTTTTTTTT'
-    }
-
-    // console.log(ulProps)
-
     return <div>
         <h2>Note list</h2>
 
-        <ul {...ulProps}>
+        <ul className="clean-list">
             {notes.map(note =>
-                <li key={note.id}>
+                <li key={note.id} className="note flex column align-center">
                     <NotePreview note={note} />
                     <section>
                         <button onClick={() => onRemoveNote(note.id)}>Remove note</button>
