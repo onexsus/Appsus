@@ -9,9 +9,9 @@ export function EmailPreview({email}){
    console.log(Mounth)
    console.log(Day)
   return(
-    <article className="email-continer flex space-between">
-      <div className="email-title">{email.subject}</div>
-      <div className="email-body">{email.body}</div>
+    <article className="email-continer flex ">
+      <div className="email-title text-truncate">{email.subject}</div>
+      <div className="email-body text-truncate">{email.body}</div>
       <div className="email-date">{Mounth} {Day}</div>
     </article>
   )

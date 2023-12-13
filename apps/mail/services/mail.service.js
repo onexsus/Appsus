@@ -42,7 +42,7 @@ function _createEmails() {
       }
       var email = {
         id: utilService.makeId(),
-        subject: utilService.makeLorem(2),
+        subject: utilService.makeLorem(1),
         body: utilService.makeLorem(num),
         isRead: false,
         sentAt: Date.now(),

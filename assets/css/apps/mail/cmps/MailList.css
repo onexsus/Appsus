@@ -1,1 +1,41 @@
  /* mail list */
+
+ .main-list{
+  display: grid;
+  grid-template-columns: 1fr;
+ }
+ .email-list{
+  background-color: bisque;
+  width: 100%;
+ }
+ .email-list li{
+  width: 100%;
+}
+.email-continer{
+  display: grid;
+  grid-template-columns: 100px 1fr 60px;
+  gap: 20px;
+  font-size: 1.2rem;
+  height: 40px;
+  text-align: start;
+  align-items: center;
+} 
+.email-title{
+   font-weight: 600;
+ }
+ .email-body{
+  
+ }
+ .email-date{
+  text-align: end;
+ }
+ .text-truncate {
+   overflow: hidden;
+  width: 100%; /* Adjust as necessary, can be a specific value like 200px or 100% for full width */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* 
+email-title
+email-body
+email-date */
