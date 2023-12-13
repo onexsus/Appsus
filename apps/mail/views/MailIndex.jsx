@@ -20,7 +20,7 @@ export function MailIndex() {
 
   }
   
-  function onRemoveToTrash(){
+  function onRemoveToTrash(emailId){
     
   }
 
