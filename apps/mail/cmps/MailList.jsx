@@ -1,6 +1,6 @@
 import { EmailPreview } from "./EmailPreview.jsx"
 
-export function MailList({emails}) {
+export function MailList({emails ,onRemoveToTrash}) {
 
     return (<section className="main-list">
         

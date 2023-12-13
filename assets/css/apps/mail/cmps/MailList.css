@@ -12,6 +12,7 @@
   width: 100%;
 }
 .email-continer{
+
   display: grid;
   grid-template-columns: 100px 1fr 60px;
   gap: 20px;
@@ -19,6 +20,7 @@
   height: 40px;
   text-align: start;
   align-items: center;
+  border: 1px solid rgb(230, 230, 230);
 } 
 .email-user{
    font-weight: 600;

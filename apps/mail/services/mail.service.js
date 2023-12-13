@@ -1,10 +1,17 @@
 // mail service
 import { utilService } from "../../../services/util.service.js";
 import { storageService } from "../../../services/async-storage.service.js";
-
 export const emailService = {
   query,
+  get,
+  remove,
+  save,
+  removeToTrash,
+  getDefaultFilter,
+  
 }
+
+let gFilterBy = { form: "momo@momo.com", to: "" }
 
 const EMAILS_KEY = "emailsDB";
 
@@ -13,14 +20,65 @@ const loggedinUser = {
   fullname: "Mahatma Appsus",
 };
 
+
+
+function removeToTrash(emailId){
+  return storageService.get(emailId).then((email)=>{
+    email.removedAt= Date.now()
+  }
+  )
+}
+function removeFromTrash(emailId){
+  return storageService.get(emailId).then((email)=>{
+    email.removedAt= null
+  }
+  )
+}
+
+function getDefaultFilter(){
+  return { form: "momo@momo.com", to: "" }
+}
+
 _createEmails()
 
 function query() {
   return storageService.query(EMAILS_KEY).then(emails=>{
-    return Promise.resolve(emails)
+    if (gFilterBy.form) {
+      emails = emails.filter(
+        (email) => email.to != gFilterBy.form
+        );
+      console.log(emails ,'form')
+    }
+    if (gFilterBy.to) {
+      emails = emails.filter(
+        (email) => email.to != gFilterBy.to
+        );
+        console.log(emails,'to')
+      }
+      return Promise.resolve(emails)
   }
-  )
-      
+  )     
+}
+// function query() {
+//   return storageService.query(EMAILS_KEY).then(emails=>{
+//     return Promise.resolve(emails)
+//   }
+//   )     
+// }
+function get(emailId) {
+  return storageService.get(EMAILS_KEY, emailId);
+}
+
+function remove(emailId) {
+  return storageService.remove(EMAILS_KEY, emailId);
+}
+
+function save(email) {
+  if (email.Id) {
+    return storageService.put(EMAILS_KEY, emailId);
+  } else {
+    return storageService.post(EMAILS_KEY, emailId);
+  }
 }
 
 function _createEmails() {
@@ -48,6 +106,7 @@ function _createEmails() {
         removedAt: null,
         from: formEmail,
         to: toEmail,
+
       };
       gEmails.push(email)
     }

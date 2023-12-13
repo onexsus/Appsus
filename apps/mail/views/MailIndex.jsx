@@ -1,10 +1,12 @@
 import { emailService } from "../services/mail.service.js";
 import {MailList} from "../cmps/MailList.jsx"
+import {showSuccessMsg} from "../../../services/event-bus.service.js"
 
 const { useState, useEffect } = React;
 
 export function MailIndex() {
   const [emails, setEmails] = useState(null);
+  const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter());
 
   useEffect(() => {
     loadEmails();
@@ -21,12 +23,18 @@ export function MailIndex() {
   }
   
   function onRemoveToTrash(emailId){
-    
+    emailService.removeToTrash(emailId)
+      .then((Emails) => {
+        setEmails(Emails)
+        showSuccessMsg(`Email successfully removed! ${emailId}`)
+      })
+      .catch((err) => console.log("err:", err));
   }
 
   function onRemove(){
 
   }
+
 
   if (!emails) return <div>Loading...</div>;
   return(
