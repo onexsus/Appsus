@@ -1,17 +1,27 @@
-import { noteService } from '../../note/services/note.service.js'
-import { NoteList } from "../../note/cmps/NoteList.jsx"
-
+const { useState, useEffect } = React;
+import { noteService } from '../../note/services/note.service.js';
+import { NoteList } from "../../note/cmps/NoteList.jsx";
+import { NoteCreate } from "../../note/cmps/NoteCreate.jsx";
 
 export function NoteIndex() {
+    const [notes, setNotes] = useState([]);
 
-const notes = noteService.notes
-// console.log(notes);
+    useEffect(() => {
+        noteService.query({})
+            .then(fetchedNotes => {
+                setNotes(fetchedNotes);
+            });
+    }, []);
 
-    if (!notes) return <div>Loading...</div>
+    const addNote = (newNote) => {
+        setNotes(prevNotes => [...prevNotes, newNote]);
+    };
 
-
-    return <div>
-        <h1>Note app</h1>
-        < NoteList notes={notes}/>
-    </div>
+    return (
+        <div>
+            <h1>Note app</h1>
+            <NoteCreate onAddNote={addNote} />
+            <NoteList notes={notes} />
+        </div>
+    );
 }
