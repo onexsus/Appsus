@@ -1,9 +1,9 @@
 const { useState } = React;
 import { noteService } from '../../note/services/note.service.js';
 
-export function NoteCreate({ onAddNote }) {
+export function NoteCreate({ onNoteAdded }) {
     const [noteContent, setNoteContent] = useState('');
-    const [noteType, setNoteType] = useState('NoteTxt'); // Default to 'NoteTxt'
+    const [noteType, setNoteType] = useState('NoteTxt');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,20 +14,16 @@ export function NoteCreate({ onAddNote }) {
             info: {}
         };
 
-        // Set the appropriate content based on note type
         if (noteType === 'NoteTxt') {
             newNote.info.txt = noteContent;
         } else if (noteType === 'NoteImg') {
-            newNote.info.url = noteContent; // Assuming 'noteContent' will have URL for images
+            newNote.info.url = noteContent;
         }
-        // Other types will be handled later
 
-        noteService.save(newNote)
-            .then(savedNote => {
-                onAddNote(savedNote);
-                setNoteContent('');
-                // Reset other fields as needed
-            });
+        noteService.save(newNote).then(() => {
+            onNoteAdded(newNote); // Pass the new note to the callback
+            setNoteContent('');
+        });
     };
 
     const handleContentChange = (event) => {
