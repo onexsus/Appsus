@@ -1,38 +1,40 @@
-const { useState } = React;
-import { noteService } from '../../note/services/note.service.js';
+// NoteCreate.jsx
+
+
+const { useState } = React
+import { utilService } from '../../../services/util.service.js'
 
 export function NoteCreate({ onNoteAdded }) {
-    const [noteContent, setNoteContent] = useState('');
-    const [noteType, setNoteType] = useState('NoteTxt');
+    const [noteContent, setNoteContent] = useState('')
+    const [noteType, setNoteType] = useState('NoteTxt')
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         let newNote = {
+            id: utilService.makeId(),
             type: noteType,
             isPinned: false,
             style: {},
             info: {}
-        };
-
-        if (noteType === 'NoteTxt') {
-            newNote.info.txt = noteContent;
-        } else if (noteType === 'NoteImg') {
-            newNote.info.url = noteContent;
         }
 
-        noteService.save(newNote).then(() => {
-            onNoteAdded(newNote); // Pass the new note to the callback
-            setNoteContent('');
-        });
-    };
+        if (noteType === 'NoteTxt') {
+            newNote.info.txt = noteContent
+        } else if (noteType === 'NoteImg') {
+            newNote.info.url = noteContent
+        }
+
+        onNoteAdded(newNote)
+        setNoteContent('')
+    }
 
     const handleContentChange = (event) => {
-        setNoteContent(event.target.value);
-    };
+        setNoteContent(event.target.value)
+    }
 
     const handleTypeChange = (event) => {
-        setNoteType(event.target.value);
-    };
+        setNoteType(event.target.value)
+    }
 
     return (
         <form className="add-note-form flex" onSubmit={handleSubmit}>
