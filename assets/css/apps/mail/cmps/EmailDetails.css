@@ -1,0 +1,35 @@
+/* email-header-details
+header-title-details
+header-btns-details
+email-btn
+details-email
+details-email
+details-body */
+
+.header-title-details{
+  font-size: 1.2rem;
+  font-weight: 600;
+  justify-content: center;
+  padding-left: 10px;
+}
+.header-btns-details{
+  
+  padding-right: 10px;
+}
+.email-details-contienr{
+
+}
+
+.details-email{
+  padding-left: 10px;
+  margin-bottom: 10px;
+  
+}
+.details-body{
+  font-size: 1rem;
+
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+
+}

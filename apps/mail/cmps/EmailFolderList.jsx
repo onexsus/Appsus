@@ -2,7 +2,12 @@ const { useState, useEffect } = React;
 
 export function EmailFolderList({ filterBy, onSetFilter }) {
   return (
-    <nav className="filter-continer flex column">
+    
+    <nav className="filter-continer flex column side-bar">
+      <section className="email-header flex">
+      <div className="email-logo"><img src="../../../assets/img/bk-email-logo.png"/></div>
+      <button className="btn-menu"><i className="fa-solid fa-bars"></i></button>
+    </section>
      <button><i className="fa-solid fa-pen"></i></button>
      <button><i className="fa-solid fa-inbox"></i></button>
      <button><i className="fa-solid fa-share-from-square"></i></button>

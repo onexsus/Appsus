@@ -10,6 +10,8 @@ const { useState, useEffect } = React;
 export function MailIndex() {
   const [emails, setEmails] = useState(null);
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter());
+  const [isHover, setIsHover] = useState(false);
+    
   
   
   
@@ -54,6 +56,14 @@ export function MailIndex() {
       })
       .catch((err) => console.log("err:", err));
   }
+  function onOpenMail(emailId){
+    emailService.updateOpen(emailId)
+      .then((updatemail)=>{
+        setEmails(prevMails => prevMails.map((mail) => mail.id === updatemail.id ? updatemail : mail))
+        showSuccessMsg(`Email successfully set read! ${emailId}`)
+      })
+      .catch((err) => console.log("err:", err));
+  }
 
   function onRemove(){
     
@@ -63,10 +73,12 @@ export function MailIndex() {
   if (!emails) return <div>Loading...</div>;
   return(
     <section className="email-main-continer">
+        <EmailFolderList onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}/>
+        <div>
         <EmailHeader/>
-        <EmailFolderList/>
-        <div>mail app</div>
-        <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onUpdateRead={onUpdateRead} onUpdateStared={onUpdateStared}/>
+        <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onUpdateRead={onUpdateRead} onUpdateStared={onUpdateStared} onOpenMail={onOpenMail}/>
+        </div>
     </section>
 
 

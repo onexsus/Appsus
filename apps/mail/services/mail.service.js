@@ -10,6 +10,7 @@ export const emailService = {
   getDefaultFilter,
   updateRead,
   updateStared,
+  updateOpen,
   
 }
 
@@ -32,6 +33,13 @@ const loggedinUser = {
 
 _createEmails()
 
+function updateOpen(emailId){
+  return storageService.get(EMAILS_KEY,emailId).then((email)=>{
+    email.isOpen= !email.isOpen
+    return save(email)
+    })
+    
+  }
 
 function updateStared(emailId){
   return storageService.get(EMAILS_KEY,emailId).then((email)=>{
@@ -132,6 +140,7 @@ function _createEmails() {
         removedAt: null,
         from: formEmail,
         to: toEmail,
+        isOpen:false,
         lables: ['important', 'romantic'] ,
 
       };

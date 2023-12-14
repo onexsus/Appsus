@@ -2,7 +2,7 @@ const { Fragment, useState } = React;
 const { Link } = ReactRouterDOM;
 
 import { utilService } from "../../../services/util.service.js";
-export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRead,}) {
+export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRead,onOpenMail}) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const date = new Date(email.sentAt);
@@ -17,10 +17,9 @@ export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRea
   //   console.log(star)
   //  }
   return (
-    <Fragment>
       <article
         className={"email-continer flex " + emailRead}
-        onClick={() => setIsExpanded((prevIsExpanded) => !prevIsExpanded)}
+        onClick={() => onOpenMail(email.id)}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -74,6 +73,5 @@ export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRea
           </div>
         )}
       </article>
-    </Fragment>
   );
 }
