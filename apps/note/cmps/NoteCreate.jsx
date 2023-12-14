@@ -67,7 +67,7 @@ export function NoteCreate({ onNoteAdded }) {
                     onChange={handleTypeChange}
                     checked={noteType === 'NoteImg'}
                 />
-                <label htmlFor="type-image">Image</label>
+                <label htmlFor="type-image">Imagee</label>
             </div>
 
             <div>
