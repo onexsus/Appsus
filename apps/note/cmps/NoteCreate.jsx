@@ -3,7 +3,7 @@ import { noteService } from '../../note/services/note.service.js';
 
 export function NoteCreate({ onNoteAdded }) {
     const [noteContent, setNoteContent] = useState('');
-    const [noteType, setNoteType] = useState('NoteTxt'); // Default to 'NoteTxt'
+    const [noteType, setNoteType] = useState('NoteTxt');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,18 +14,15 @@ export function NoteCreate({ onNoteAdded }) {
             info: {}
         };
 
-        // Set the appropriate content based on note type
         if (noteType === 'NoteTxt') {
             newNote.info.txt = noteContent;
         } else if (noteType === 'NoteImg') {
-            newNote.info.url = noteContent; // Assuming 'noteContent' will have URL for images
+            newNote.info.url = noteContent;
         }
-        // Other types will be handled later
 
         noteService.save(newNote).then(() => {
+            onNoteAdded(newNote); // Pass the new note to the callback
             setNoteContent('');
-            // Reset other fields as needed
-            onNoteAdded(); // Trigger callback to refresh the note list in the parent component
         });
     };
 
@@ -67,7 +64,7 @@ export function NoteCreate({ onNoteAdded }) {
                     onChange={handleTypeChange}
                     checked={noteType === 'NoteImg'}
                 />
-                <label htmlFor="type-image">Imagee</label>
+                <label htmlFor="type-image">Image</label>
             </div>
 
             <div>

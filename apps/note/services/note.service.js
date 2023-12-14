@@ -10,15 +10,13 @@ export const noteService = {
     getEmptyNote
 }
 
-function query(filterBy) {
-    return storageService.query(NOTE_KEY)
-        .then(notes => {
-            if (filterBy && filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
-                notes = notes.filter(note => regExp.test(note.info.txt || note.info.title))
-            }
-            return notes
-        })
+async function query(filterBy) {
+    let notes = await storageService.query(NOTE_KEY)
+    if (filterBy && filterBy.txt) {
+        const regExp = new RegExp(filterBy.txt, 'i')
+        notes = notes.filter(note => regExp.test(note.info.txt || note.info.title))
+    }
+    return notes;
 }
 
 function get(noteId) {
@@ -29,12 +27,13 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
-function save(note) {
+async function save(note) {
     if (note.id) {
-        return storageService.put(NOTE_KEY, note)
+        await storageService.put(NOTE_KEY, note);
     } else {
-        return storageService.post(NOTE_KEY, note)
+        await storageService.post(NOTE_KEY, note);
     }
+    return query();
 }
 
 function getEmptyNote() {

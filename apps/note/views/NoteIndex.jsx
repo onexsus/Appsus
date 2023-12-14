@@ -1,3 +1,4 @@
+// NoteIndex.jsx
 const { useState, useEffect } = React;
 import { noteService } from '../../note/services/note.service.js';
 import { NoteList } from "../cmps/NoteList.jsx";
@@ -16,7 +17,6 @@ export function NoteIndex() {
         });
     };
 
-    // Add a new function to handle note addition
     const handleNoteAdded = () => {
         fetchNotes();
     };
@@ -25,7 +25,7 @@ export function NoteIndex() {
         <div>
             <h1>Note app</h1>
             <NoteCreate onNoteAdded={handleNoteAdded} />
-            <NoteList notes={notes} />
+            <NoteList notes={notes} onNoteChange={setNotes} />
         </div>
     );
 }
