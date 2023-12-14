@@ -10,6 +10,12 @@
  }
  .email-list li{
   width: 100%;
+  border-bottom: 0.5px solid rgb(230, 230, 230);
+}
+
+.email-list li:first-child{
+  width: 100%;
+  border-top: 0.5px solid rgb(230, 230, 230);
 }
 .email-continer{
 
@@ -20,10 +26,9 @@
   height: 40px;
   text-align: start;
   align-items: center;
-  border: 0.5px solid rgb(230, 230, 230);
 } 
 .email-continer:hover{
-  box-shadow: rgba(26, 28, 31, 0.12) 0px -1px 0px 0px inset;
+  box-shadow: rgba(26, 28, 31, 0.12) 0px -1px 1px 1px inset;
   cursor: pointer;
   
 } 
@@ -59,6 +64,9 @@
   border: 0;
   cursor: pointer;
   margin-right: 5px;
+}
+.email-btn:hover{
+  background-color:#c4c7c5 ;
 }
 /* 
 email-title

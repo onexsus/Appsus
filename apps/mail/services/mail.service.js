@@ -8,8 +8,8 @@ export const emailService = {
   save,
   removeToTrash,
   getDefaultFilter,
-  setRead,
-  setUnread,
+  updateRead,
+  updateStared,
   
 }
 
@@ -19,7 +19,7 @@ const criteria = {
   isRead: true, 
   isStared: true, 
   lables: ['important', 'romantic'] 
- }
+}
 
 
 
@@ -30,59 +30,54 @@ const loggedinUser = {
   fullname: "Mahatma Appsus",
 };
 
+_createEmails()
 
 
-function setUnread(emailId){
+function updateStared(emailId){
   return storageService.get(EMAILS_KEY,emailId).then((email)=>{
-    email.isRead= false
+    email.isStared= !email.isStared
     return save(email)
     })
     
   }
-function setRead(emailId){
+
+function updateRead(emailId){
   return storageService.get(EMAILS_KEY,emailId).then((email)=>{
-    email.isRead= true
+    email.isRead= !email.isRead
     return save(email)
     })
     
   }
-function removeToTrash(emailId){
+function  removeToTrash(emailId){
   return storageService.get(EMAILS_KEY,emailId).then((email)=>{
-    email.removedAt= Date.now()
+    email.removedAt= email.removeAt ? null : Date.now()
     return save(email)
     })
     
   }
-function removeFromTrash(emailId){
-  return storageService.get(EMAILS_KEY,emailId).then((email)=>{
-    email.removedAt= null
-  }
-  )
-}
 
 function getDefaultFilter(){
-  return { fliterBy: "index",}
+  return { fliterBy: "sent",}
 }
 
-_createEmails()
 
 function query(gFilterBy) {
   return storageService.query(EMAILS_KEY).then(emails=>{
     console.log(emails)
     if (gFilterBy.fliterBy=== "index") {
       emails = emails.filter(
-        (email) => {if(email.from != loggedinUser.email && email.removedAt ===null) return email
+        (email) => {if(email.from !== loggedinUser.email && email.removedAt ===null) return email
         }
         );
       console.log(emails ,'index')
     }
-    if (gFilterBy.fliterBy=== "send") {
+    if (gFilterBy.fliterBy=== "sent") {
       emails = emails.filter(
         (email) => {
-          if(email.from = loggedinUser.email) return email
+          if(email.from === loggedinUser.email && email.removedAt ===null) return email
         } 
         );
-        console.log(emails,'send')
+        console.log(emails,'sent')
       }
       return Promise.resolve(emails)
   }

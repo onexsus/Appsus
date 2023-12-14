@@ -1,5 +1,7 @@
 import { emailService } from "../services/mail.service.js";
 import {MailList} from "../cmps/MailList.jsx"
+import {EmailHeader} from "../cmps/EmailHeader.jsx"
+import {EmailFolderList} from "../cmps/EmailFolderList.jsx"
 import {showSuccessMsg} from "../../../services/event-bus.service.js"
 
 const { useState, useEffect } = React;
@@ -24,22 +26,21 @@ export function MailIndex() {
   function onAddEmail(){
      
   }
-
-  function onSetRead(emailId){
+  function onUpdateStared(emailId){
     console.log(emailId)
-    emailService.setRead(emailId)
-      .then(()=>{
-        loadEmails()
-        showSuccessMsg(`Email successfully set read! ${emailId}`)
+    emailService.updateStared(emailId)
+      .then((updatemail)=>{
+        setEmails(prevMails => prevMails.map((mail) => mail.id === updatemail.id ? updatemail : mail))
+        showSuccessMsg(`Email successfully un set star! ${emailId}`)
       })
       .catch((err) => console.log("err:", err));
   }
-  function onSetUnread(emailId){
+  function onUpdateRead(emailId){
     console.log(emailId)
-    emailService.setUnread(emailId)
-      .then(()=>{
-        loadEmails()
-        showSuccessMsg(`Email successfully set unread! ${emailId}`)
+    emailService.updateRead(emailId)
+      .then((updatemail)=>{
+        setEmails(prevMails => prevMails.map((mail) => mail.id === updatemail.id ? updatemail : mail))
+        showSuccessMsg(`Email successfully set read! ${emailId}`)
       })
       .catch((err) => console.log("err:", err));
   }
@@ -47,27 +48,25 @@ export function MailIndex() {
   function onRemoveToTrash(emailId){
     console.log(emailId)
     emailService.removeToTrash(emailId)
-      .then(()=>{
-        loadEmails()
+    .then((updatemail)=>{
+      setEmails(prevMails => prevMails.map((mail) => mail.id === updatemail.id ? updatemail : mail))
         showSuccessMsg(`Email successfully removed to trash! ${emailId}`)
       })
       .catch((err) => console.log("err:", err));
   }
 
   function onRemove(){
-
+    
   }
 
 
   if (!emails) return <div>Loading...</div>;
   return(
-    <section>
-      <section className="email-header">
-      <div className="email-logo"><img src="../../../assets/img/bk-email-logo.png"/></div>
-      <button>Menu</button>
-    </section>
+    <section className="email-main-continer">
+        <EmailHeader/>
+        <EmailFolderList/>
         <div>mail app</div>
-        <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onSetRead={onSetRead} onSetUnread={onSetUnread}/>
+        <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onUpdateRead={onUpdateRead} onUpdateStared={onUpdateStared}/>
     </section>
 
 
