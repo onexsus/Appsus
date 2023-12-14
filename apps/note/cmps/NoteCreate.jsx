@@ -1,7 +1,7 @@
 const { useState } = React;
 import { noteService } from '../../note/services/note.service.js';
 
-export function NoteCreate({ onAddNote }) {
+export function NoteCreate({ onNoteAdded }) {
     const [noteContent, setNoteContent] = useState('');
     const [noteType, setNoteType] = useState('NoteTxt'); // Default to 'NoteTxt'
 
@@ -22,12 +22,11 @@ export function NoteCreate({ onAddNote }) {
         }
         // Other types will be handled later
 
-        noteService.save(newNote)
-            .then(savedNote => {
-                onAddNote(savedNote);
-                setNoteContent('');
-                // Reset other fields as needed
-            });
+        noteService.save(newNote).then(() => {
+            setNoteContent('');
+            // Reset other fields as needed
+            onNoteAdded(); // Trigger callback to refresh the note list in the parent component
+        });
     };
 
     const handleContentChange = (event) => {
