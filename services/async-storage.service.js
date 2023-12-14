@@ -84,7 +84,7 @@ function post(entityType, newEntity) {
     newEntity = { ...newEntity }
     newEntity.id = utilService.makeId() // Using makeId from utilService
     return query(entityType).then(entities => {
-        entities.push(newEntity)
+        entities.unshift(newEntity)
         _save(entityType, entities)
         return newEntity
     })

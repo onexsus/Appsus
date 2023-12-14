@@ -1,18 +1,29 @@
-const { useState, useEffect } = React;
+// NoteList.jsx //
 
-import { storageService } from '../../../services/async-storage.service.js'; // Import your storage service
-import { NotePreview } from '../../note/cmps/NotePreview.jsx';
+
+import { storageService } from '../../../services/async-storage.service.js'
+import { NotePreview } from '../../note/cmps/NotePreview.jsx'
+const { useNavigate } = ReactRouterDOM
 
 export function NoteList({ notes, onNoteChange }) {
+    const navigate = useNavigate();
+
     const onRemoveNote = (noteId) => {
-        // Remove the note from storage using your service
         storageService.remove('notes', noteId)
             .then(() => {
-                // Update the state to remove the deleted note
                 onNoteChange((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
             })
             .catch((error) => {
                 console.error('Error removing note from storage:', error);
+            });
+    };
+
+    const handleNoteUpdate = (updatedNote) => {
+        // Update the note in storage
+        storageService.put('notes', updatedNote)
+            .then(() => {
+                // Refresh the notes list
+                onNoteChange(prevNotes => prevNotes.map(note => note.id === updatedNote.id ? updatedNote : note));
             });
     };
 
@@ -22,14 +33,8 @@ export function NoteList({ notes, onNoteChange }) {
             <ul className="clean-list">
                 {notes.map((note) => (
                     <li key={note.id} className="note flex column align-center">
-                        <NotePreview note={note} />
-                        <section>
-                            <button disabled title="Coming soon..">Pin note</button>
-                            <button disabled title="Coming soon..">Set note color</button>
-                            <button disabled title="Coming soon..">Send as email</button>
-                            <button>Edit</button>
-                            <button onClick={() => onRemoveNote(note.id)}>Remove note</button>
-                        </section>
+                        <NotePreview note={note} onNoteChange={handleNoteUpdate} />
+                        {/* ... (rest of the list item components) */}
                     </li>
                 ))}
             </ul>
