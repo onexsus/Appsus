@@ -3,18 +3,21 @@ import {MailList} from "../cmps/MailList.jsx"
 import {showSuccessMsg} from "../../../services/event-bus.service.js"
 
 const { useState, useEffect } = React;
+// const { useParams, useNavigate} = ReactRouterDOM
 
 export function MailIndex() {
   const [emails, setEmails] = useState(null);
   const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter());
-
+  
+  
+  
   useEffect(() => {
     loadEmails();
-  }, []);
+  }, [filterBy]);
   console.log(emails)
 
   function loadEmails() {
-    emailService.query()
+    emailService.query(filterBy)
       .then((emails) => setEmails(emails))
       .catch((err) => console.log("err:", err));
   }
@@ -26,7 +29,7 @@ export function MailIndex() {
     emailService.removeToTrash(emailId)
       .then((Emails) => {
         setEmails(Emails)
-        showSuccessMsg(`Email successfully removed! ${emailId}`)
+        showSuccessMsg(`Email successfully removed to trash! ${emailId}`)
       })
       .catch((err) => console.log("err:", err));
   }

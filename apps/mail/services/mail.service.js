@@ -11,7 +11,15 @@ export const emailService = {
   
 }
 
-let gFilterBy = { form: "momo@momo.com", to: "" }
+const criteria = {
+  status: 'inbox/sent/trash/draft',
+  txt: 'puki', 
+  isRead: true, 
+  isStared: true, 
+  lables: ['important', 'romantic'] 
+ }
+
+
 
 const EMAILS_KEY = "emailsDB";
 
@@ -36,22 +44,25 @@ function removeFromTrash(emailId){
 }
 
 function getDefaultFilter(){
-  return { form: "momo@momo.com", to: "" }
+  return { fliterBy: "index",}
 }
 
 _createEmails()
 
-function query() {
+function query(gFilterBy) {
   return storageService.query(EMAILS_KEY).then(emails=>{
-    if (gFilterBy.form) {
+    if (gFilterBy.fliterBy=== "index") {
       emails = emails.filter(
-        (email) => email.to != gFilterBy.form
+        (email) => {if(email.from != loggedinUser.email) return email
+        }
         );
       console.log(emails ,'form')
     }
-    if (gFilterBy.to) {
+    if (gFilterBy.fliterBy=== "send") {
       emails = emails.filter(
-        (email) => email.to != gFilterBy.to
+        (email) => {
+          if(email.from = loggedinUser.email) return email
+        } 
         );
         console.log(emails,'to')
       }
@@ -99,13 +110,15 @@ function _createEmails() {
       }
       var email = {
         id: utilService.makeId(),
-        subject: utilService.makeLorem(1),
+        subject: utilService.makeLorem(3),
         body: utilService.makeLorem(num),
         isRead: false,
+        isStared: false,
         sentAt: Date.now(),
         removedAt: null,
         from: formEmail,
         to: toEmail,
+        lables: ['important', 'romantic'] ,
 
       };
       gEmails.push(email)
