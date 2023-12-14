@@ -9,7 +9,12 @@ export function NoteEdit() {
 
     useEffect(() => {
         noteService.get(noteId).then(fetchedNote => {
-            setNote(fetchedNote || { info: {} });
+            if (fetchedNote) {
+                setNote(fetchedNote);
+                window.history.pushState({}, '', `/note/edit/${noteId}`);
+            } else {
+                setNote({ info: {} });
+            }
         });
     }, [noteId]);
 
