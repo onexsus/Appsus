@@ -8,6 +8,8 @@ export const emailService = {
   save,
   removeToTrash,
   getDefaultFilter,
+  setRead,
+  setUnread,
   
 }
 
@@ -30,14 +32,29 @@ const loggedinUser = {
 
 
 
-function removeToTrash(emailId){
-  return storageService.get(emailId).then((email)=>{
-    email.removedAt= Date.now()
+function setUnread(emailId){
+  return storageService.get(EMAILS_KEY,emailId).then((email)=>{
+    email.isRead= false
+    return save(email)
+    })
+    
   }
-  )
-}
+function setRead(emailId){
+  return storageService.get(EMAILS_KEY,emailId).then((email)=>{
+    email.isRead= true
+    return save(email)
+    })
+    
+  }
+function removeToTrash(emailId){
+  return storageService.get(EMAILS_KEY,emailId).then((email)=>{
+    email.removedAt= Date.now()
+    return save(email)
+    })
+    
+  }
 function removeFromTrash(emailId){
-  return storageService.get(emailId).then((email)=>{
+  return storageService.get(EMAILS_KEY,emailId).then((email)=>{
     email.removedAt= null
   }
   )
@@ -51,12 +68,13 @@ _createEmails()
 
 function query(gFilterBy) {
   return storageService.query(EMAILS_KEY).then(emails=>{
+    console.log(emails)
     if (gFilterBy.fliterBy=== "index") {
       emails = emails.filter(
-        (email) => {if(email.from != loggedinUser.email) return email
+        (email) => {if(email.from != loggedinUser.email && email.removedAt ===null) return email
         }
         );
-      console.log(emails ,'form')
+      console.log(emails ,'index')
     }
     if (gFilterBy.fliterBy=== "send") {
       emails = emails.filter(
@@ -64,7 +82,7 @@ function query(gFilterBy) {
           if(email.from = loggedinUser.email) return email
         } 
         );
-        console.log(emails,'to')
+        console.log(emails,'send')
       }
       return Promise.resolve(emails)
   }
@@ -85,10 +103,11 @@ function remove(emailId) {
 }
 
 function save(email) {
-  if (email.Id) {
-    return storageService.put(EMAILS_KEY, emailId);
-  } else {
-    return storageService.post(EMAILS_KEY, emailId);
+  if (email.id) {
+    console.log('PUT')
+    return storageService.put(EMAILS_KEY, email);
+  } else {console.log('POST')
+    return storageService.post(EMAILS_KEY, email);
   }
 }
 

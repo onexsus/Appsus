@@ -5,7 +5,7 @@
   grid-template-columns: 1fr;
  }
  .email-list{
-  background-color: bisque;
+  background-color: #fff;
   width: 100%;
  }
  .email-list li{
@@ -14,35 +14,52 @@
 .email-continer{
 
   display: grid;
-  grid-template-columns:20px 20px 200px 1fr 60px;
+  grid-template-columns:20px 20px 200px 1fr 100px;
   gap: 20px;
   font-size: 1.2rem;
   height: 40px;
   text-align: start;
   align-items: center;
-  border: 1px solid rgb(230, 230, 230);
+  border: 0.5px solid rgb(230, 230, 230);
 } 
-.email-user{
-   font-weight: 600;
- }
- .email-body{
+.email-continer:hover{
+  box-shadow: rgba(26, 28, 31, 0.12) 0px -1px 0px 0px inset;
+  cursor: pointer;
   
- }
- .email-date{
+} 
+/* .email-user{
+  font-weight: 600;
+} */
+/* .email-subject{
+  font-weight: 600;
+} */
+.email-body{
+  font-weight: 300;
+}
+.email-date{
   text-align: end;
- }
- .text-truncate {
-   overflow: hidden;
+}
+.text-truncate {
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .read{
-
+  font-weight: 300;
+  background-color: #f2f6fc;
 }
 .unread{
+  font-weight: 600;
 
 }
-
+.email-btn{
+  border-radius: 50%;
+  padding: 6px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  margin-right: 5px;
+}
 /* 
 email-title
 email-body

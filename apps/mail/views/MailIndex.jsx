@@ -22,13 +22,33 @@ export function MailIndex() {
       .catch((err) => console.log("err:", err));
   }
   function onAddEmail(){
+     
+  }
 
+  function onSetRead(emailId){
+    console.log(emailId)
+    emailService.setRead(emailId)
+      .then(()=>{
+        loadEmails()
+        showSuccessMsg(`Email successfully set read! ${emailId}`)
+      })
+      .catch((err) => console.log("err:", err));
+  }
+  function onSetUnread(emailId){
+    console.log(emailId)
+    emailService.setUnread(emailId)
+      .then(()=>{
+        loadEmails()
+        showSuccessMsg(`Email successfully set unread! ${emailId}`)
+      })
+      .catch((err) => console.log("err:", err));
   }
   
   function onRemoveToTrash(emailId){
+    console.log(emailId)
     emailService.removeToTrash(emailId)
-      .then((Emails) => {
-        setEmails(Emails)
+      .then(()=>{
+        loadEmails()
         showSuccessMsg(`Email successfully removed to trash! ${emailId}`)
       })
       .catch((err) => console.log("err:", err));
@@ -47,7 +67,7 @@ export function MailIndex() {
       <button>Menu</button>
     </section>
         <div>mail app</div>
-        <MailList emails={emails}/>
+        <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onSetRead={onSetRead} onSetUnread={onSetUnread}/>
     </section>
 
 
