@@ -5,46 +5,57 @@ const { useState } = React
 import { utilService } from '../../../services/util.service.js'
 
 export function NoteCreate({ onNoteAdded }) {
-    const [noteContent, setNoteContent] = useState('')
-    const [noteType, setNoteType] = useState('NoteTxt')
+    const [noteTitle, setNoteTitle] = useState('');
+    const [noteContent, setNoteContent] = useState('');
+    const [noteType, setNoteType] = useState('NoteTxt');
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         let newNote = {
             id: utilService.makeId(),
             type: noteType,
             isPinned: false,
             style: {},
-            info: {}
-        }
+            info: { title: noteTitle }
+        };
 
         if (noteType === 'NoteTxt') {
-            newNote.info.txt = noteContent
+            newNote.info.txt = noteContent;
         } else if (noteType === 'NoteImg') {
-            newNote.info.url = noteContent
+            newNote.info.url = noteContent;
         }
 
-        onNoteAdded(newNote)
-        setNoteContent('')
-    }
+        onNoteAdded(newNote);
+        setNoteTitle('');
+        setNoteContent('');
+    };
+
+    const handleTitleChange = (event) => {
+        setNoteTitle(event.target.value);
+    };
 
     const handleContentChange = (event) => {
-        setNoteContent(event.target.value)
-    }
+        setNoteContent(event.target.value);
+    };
 
     const handleTypeChange = (event) => {
-        setNoteType(event.target.value)
-    }
+        setNoteType(event.target.value);
+    };
 
     return (
-        <form className="add-note-form flex" onSubmit={handleSubmit}>
+        <form className="add-note-form" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={noteTitle}
+                onChange={handleTitleChange}
+                placeholder="Enter note title"
+            />
             <input
                 type="text"
                 value={noteContent}
                 onChange={handleContentChange}
                 placeholder="Enter note content"
             />
-
             <div>
                 <input
                     type="radio"
@@ -56,7 +67,6 @@ export function NoteCreate({ onNoteAdded }) {
                 />
                 <label htmlFor="type-text">Text</label>
             </div>
-
             <div>
                 <input
                     type="radio"
@@ -68,7 +78,6 @@ export function NoteCreate({ onNoteAdded }) {
                 />
                 <label htmlFor="type-image">Image</label>
             </div>
-
             <div>
                 <input
                     type="radio"
@@ -81,7 +90,6 @@ export function NoteCreate({ onNoteAdded }) {
                 />
                 <label htmlFor="type-video">Video</label>
             </div>
-
             <div>
                 <input
                     type="radio"
@@ -94,7 +102,6 @@ export function NoteCreate({ onNoteAdded }) {
                 />
                 <label htmlFor="type-todo">Todo</label>
             </div>
-
             <button type="submit">Add Note</button>
         </form>
     );
