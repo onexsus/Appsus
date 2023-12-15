@@ -19,7 +19,7 @@ export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRea
   return (
       <article
         className={"email-continer flex " + emailRead}
-        onClick={() => onOpenMail(email.id)}
+        
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -36,8 +36,8 @@ export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRea
             <i className="fa-solid fa-star email-btn"></i>
           </div>
         )}
-        <div className="email-user text-truncate">{email.from}</div>
-        <div className="email-content text-truncate">
+        <div onClick={() => onOpenMail(email.id)} className="email-user text-truncate">{email.from}</div>
+        <div onClick={() => onOpenMail(email.id)} className="email-content text-truncate">
           <span className="email-subject"> {email.subject}</span>
           <span className="email-body "> {email.body}</span>
         </div>
