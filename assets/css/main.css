@@ -25,5 +25,6 @@
 @import './apps/mail/cmps/EmailHeader.css';
 @import './apps/mail/cmps/EmailFolderList.css';
 @import './apps/mail/cmps/EmailDetails.css';
+@import './apps/mail/cmps/EmailFooter.css';
 
 @import '../css/apps/note/cmps/NoteList.css';

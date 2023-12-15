@@ -68,13 +68,16 @@ export function MailIndex() {
   function onRemove(){
     
   }
-
+  let openNav= isHover ? 'open-nav' : ' '
+  console.log(openNav)
 
   if (!emails) return <div>Loading...</div>;
   return(
-    <section className="email-main-continer">
-        <EmailFolderList onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}/>
+    <section className={"email-main-continer " +openNav}>
+         <div onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}>
+        <EmailFolderList />
+         </div>
         <div>
         <EmailHeader/>
         <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onUpdateRead={onUpdateRead} onUpdateStared={onUpdateStared} onOpenMail={onOpenMail}/>

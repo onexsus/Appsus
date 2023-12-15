@@ -3,9 +3,16 @@
  .email-main-continer{
   display: grid;
   /* grid-template-columns: minmax(50px,200px) 1fr; */
-  grid-template-columns: 50px 1fr;
+  grid-template-columns: 60px 1fr;
+  transition:width .3s linear;
+  transition: all 250ms;
+  background-color: #eaf1fb;
  }
  
  .side-bar{
-  width: 50px;
+  /* width: 100%; */
+  float: left;
+}
+.open-nav{
+  grid-template-columns: 200px 1fr;
  }
