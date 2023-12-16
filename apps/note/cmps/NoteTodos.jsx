@@ -26,7 +26,8 @@ export function NoteTodos({ note, onNoteChange }) {
         onNoteChange({ ...note, info: { ...note.info, todos: updatedTodos } });
     };
 
-    const removeTodo = (idx) => {
+    const removeTodo = (idx, event) => {
+        event.stopPropagation()
         const updatedTodos = note.info.todos.filter((_, index) => index !== idx);
         onNoteChange({ ...note, info: { ...note.info, todos: updatedTodos } });
     };
@@ -37,7 +38,7 @@ export function NoteTodos({ note, onNoteChange }) {
                 {note.info.todos.map((todo, idx) => (
                     <li key={idx} className={todo.doneAt ? 'done' : ''} onClick={() => toggleTodoDone(idx)}>
                         {todo.txt}
-                        <button onClick={() => removeTodo(idx)}>Remove</button>
+                        <button onClick={(e) => removeTodo(idx, e)}>Remove</button>
                     </li>
                 ))}
             </ul>
