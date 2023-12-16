@@ -5,7 +5,7 @@ export function EmailHeader(){
     <section className="email-header flex align-center space-between">
       <div className="flex align-center">
 
-      <button className="btn-header-menu"> <i class="fa-solid fa-bars "></i> </button>
+      <button className="btn-header-menu"> <i className="fa-solid fa-bars "></i> </button>
        <div className="email-logo"><img src="../../../assets/img/bkmail-logo.png" alt="mail-logo" /></div>
 
        <form className="header-form flex align-center" action="">

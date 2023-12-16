@@ -13,6 +13,7 @@ export const emailService = {
   updateOpen,
   deleteEmail,
   setStatus,
+  createMail,
   
 }
 
@@ -90,7 +91,7 @@ function query(gFilterBy) {
     console.log(emails)
     if (gFilterBy.status=== "index") {
       emails = emails.filter(
-        (email) => {if(email.from !== loggedinUser.email && email.removedAt ===null) return email
+        (email) => {if(email.from !== loggedinUser.email && email.removedAt ===null && email.sentAt !==null) return email
         }
         );
       console.log(emails ,'index')
@@ -98,10 +99,26 @@ function query(gFilterBy) {
     if (gFilterBy.status=== "sent") {
       emails = emails.filter(
         (email) => {
-          if(email.from === loggedinUser.email && email.removedAt ===null) return email
+          if(email.from === loggedinUser.email && email.removedAt ===null && email.sentAt !==null) return email
         } 
         );
         console.log(emails,'sent')
+      }
+    if (gFilterBy.status=== "draft") {
+      emails = emails.filter(
+        (email) => {
+          if(email.sentAt === null && email.removedAt ===null ) return email
+        } 
+        );
+        console.log(emails,'draft')
+      }
+    if (gFilterBy.status=== "important") {
+      emails = emails.filter(
+        (email) => {
+          if(email.isStared === true && email.removedAt ===null) return email
+        } 
+        );
+        console.log(emails,'draft')
       }
     if (gFilterBy.status=== "trash") {
       emails = emails.filter(
@@ -159,6 +176,32 @@ function save(email) {
     return storageService.post(EMAILS_KEY, email);
   }
 }
+
+function createMail(from,to,subject,content,isSent){
+
+   if(isSent==true){
+   var  sent=Date.now()
+   }else{
+  var  sent=null
+   }
+  var newMail={
+    id:null,
+    subject: subject,
+    body: content,
+    isRead: false,
+    isStared: false,
+    sentAt: sent,
+    removedAt: null,
+    from: from,
+    to: to,
+    isOpen:false,
+    lables: ['important', 'romantic'] ,
+
+  }
+  return storageService.post(EMAILS_KEY, newMail)
+  
+ 
+  }
 
 function _createEmails() {
   let gEmails = utilService.loadFromStorage(EMAILS_KEY)
