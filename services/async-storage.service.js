@@ -11,48 +11,49 @@ export const storageService = {
 
 const defaultNotes = [
     {
-        id: 'n101',
+        id: utilService.makeId(),
         type: 'NoteTxt',
-        isPinned: true,
-        style: { backgroundColor: '#ffadad' },
+        isPinned: false,
+        style: {},
         info: {
-            txt: 'Fullstack Me Baby!'
+            title: 'Text Note',
+            txt: 'This is a default text note'
         }
     },
     {
-        id: 'n102',
+        id: utilService.makeId(),
         type: 'NoteImg',
         isPinned: false,
-        style: { backgroundColor: '#ffd6a5' },
+        style: {},
         info: {
-            title: 'Bobi and Me',
+            title: 'Image Note',
             url: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png'
         }
     },
     {
-        id: 'n103',
-        type: 'NoteTodos',
+        id: utilService.makeId(),
+        type: 'NoteVideo',
         isPinned: false,
-        style: { backgroundColor: '#fdffb6' },
+        style: {},
         info: {
-            title: 'Get my stuff together',
-            todos: [
-                { txt: 'Driving license', doneAt: null },
-                { txt: 'Coding power', doneAt: 187111111 }
-            ]
+            title: 'Video Note',
+            url: 'https://www.youtube.com/watch?v=RXj8Eq5h7hE'
         }
     },
     {
-        id: 'n104',
-        type: 'NoteTxt',
+        id: utilService.makeId(),
+        type: 'NoteTodos',
         isPinned: false,
-        style: { backgroundColor: '#caffbf' },
+        style: {},
         info: {
-            txt: 'Remember to buy milk'
+            title: 'Todo Note',
+            todos: [
+                { txt: 'First task', doneAt: null },
+                { txt: 'Second task', doneAt: null }
+            ]
         }
-    },
-    // Add more notes as needed
-];
+    }
+]
 
 function initDefaultData() {
     let entities = JSON.parse(localStorage.getItem('noteDB')) || [];

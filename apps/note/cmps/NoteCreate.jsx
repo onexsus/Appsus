@@ -1,8 +1,8 @@
 // NoteCreate.jsx
 
 
-const { useState } = React
-import { utilService } from '../../../services/util.service.js'
+const { useState } = React;
+import { utilService } from '../../../services/util.service.js';
 
 export function NoteCreate({ onNoteAdded }) {
     const [noteTitle, setNoteTitle] = useState('');
@@ -23,6 +23,10 @@ export function NoteCreate({ onNoteAdded }) {
             newNote.info.txt = noteContent;
         } else if (noteType === 'NoteImg') {
             newNote.info.url = noteContent;
+        } else if (noteType === 'NoteVideo') {
+            newNote.info.url = noteContent; // YouTube video URL
+        } else if (noteType === 'NoteTodos') {
+            newNote.info.todos = noteContent.split(',').map(txt => ({ txt: txt.trim(), doneAt: null }));
         }
 
         onNoteAdded(newNote);
@@ -42,6 +46,7 @@ export function NoteCreate({ onNoteAdded }) {
         setNoteType(event.target.value);
     };
 
+
     return (
         <form className="add-note-form" onSubmit={handleSubmit}>
             <input
@@ -54,7 +59,12 @@ export function NoteCreate({ onNoteAdded }) {
                 type="text"
                 value={noteContent}
                 onChange={handleContentChange}
-                placeholder="Enter note content"
+                placeholder={
+                    noteType === 'NoteTxt' ? "What's on your mind..." :
+                    noteType === 'NoteImg' ? "Enter image URL..." :
+                    noteType === 'NoteVideo' ? "Enter video URL..." :
+                    "Enter comma-separated list..."
+                }
             />
             <div>
                 <input
@@ -85,7 +95,6 @@ export function NoteCreate({ onNoteAdded }) {
                     name="note-type"
                     value="NoteVideo"
                     onChange={handleTypeChange}
-                    disabled={true}
                     checked={noteType === 'NoteVideo'}
                 />
                 <label htmlFor="type-video">Video</label>
@@ -95,14 +104,13 @@ export function NoteCreate({ onNoteAdded }) {
                     type="radio"
                     id="type-todo"
                     name="note-type"
-                    value="NoteTodo"
+                    value="NoteTodos"
                     onChange={handleTypeChange}
-                    disabled={true}
-                    checked={noteType === 'NoteTodo'}
+                    checked={noteType === 'NoteTodos'}
                 />
                 <label htmlFor="type-todo">Todo</label>
             </div>
             <button type="submit">Add Note</button>
         </form>
-    );
+    );    
 }
