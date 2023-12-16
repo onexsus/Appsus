@@ -6,13 +6,10 @@
     padding: 1em;
     
     border: 1px solid darkgray;
-    background-color: ivory;
+    background-color: rgb(84, 84, 78);
 
     text-align: center;
 
     gap: 1em;
  }
 
- .add-note-form{
-   background-color: lightcoral;
- }

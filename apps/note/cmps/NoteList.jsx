@@ -1,4 +1,4 @@
-// NoteList.jsx //
+// NoteList.jsx
 
 
 import { NotePreview } from '../../note/cmps/NotePreview.jsx';
