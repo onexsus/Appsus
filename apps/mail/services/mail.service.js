@@ -11,6 +11,7 @@ export const emailService = {
   updateRead,
   updateStared,
   updateOpen,
+  deleteEmail,
   
 }
 
@@ -58,11 +59,21 @@ function updateRead(emailId){
   }
 function  removeToTrash(emailId){
   return storageService.get(EMAILS_KEY,emailId).then((email)=>{
-    email.removedAt= email.removeAt ? null : Date.now()
+    console.log(email,'before')
+    if(email.removedAt === null){
+      email.removedAt= Date.now()
+    }else{
+      email.removedAt=null
+    }
+    console.log(email,'after')
     return save(email)
     })
     
   }
+
+function deleteEmail(emailId){
+  return storageService.remove(EMAILS_KEY,emailId)
+}
 
 function getDefaultFilter(){
   return { fliterBy: "sent",}
@@ -72,14 +83,14 @@ function getDefaultFilter(){
 function query(gFilterBy) {
   return storageService.query(EMAILS_KEY).then(emails=>{
     console.log(emails)
-    if (gFilterBy.fliterBy=== "index") {
+    if (gFilterBy.status=== "index") {
       emails = emails.filter(
         (email) => {if(email.from !== loggedinUser.email && email.removedAt ===null) return email
         }
         );
       console.log(emails ,'index')
     }
-    if (gFilterBy.fliterBy=== "sent") {
+    if (gFilterBy.status=== "sent") {
       emails = emails.filter(
         (email) => {
           if(email.from === loggedinUser.email && email.removedAt ===null) return email
@@ -87,10 +98,40 @@ function query(gFilterBy) {
         );
         console.log(emails,'sent')
       }
+    if (gFilterBy.status=== "trash") {
+      emails = emails.filter(
+        (email) => {
+          if(email.removedAt !== null) return email
+        } 
+        );
+        console.log(emails,'trash')
+      }
       return Promise.resolve(emails)
   }
   )     
 }
+// function query(gFilterBy) {
+//   return storageService.query(EMAILS_KEY).then(emails=>{
+//     console.log(emails)
+//     if (gFilterBy.fliterBy=== "index") {
+//       emails = emails.filter(
+//         (email) => {if(email.from !== loggedinUser.email && email.removedAt ===null) return email
+//         }
+//         );
+//       console.log(emails ,'index')
+//     }
+//     if (gFilterBy.fliterBy=== "sent") {
+//       emails = emails.filter(
+//         (email) => {
+//           if(email.from === loggedinUser.email && email.removedAt ===null) return email
+//         } 
+//         );
+//         console.log(emails,'sent')
+//       }
+//       return Promise.resolve(emails)
+//   }
+//   )     
+// }
 // function query() {
 //   return storageService.query(EMAILS_KEY).then(emails=>{
 //     return Promise.resolve(emails)
