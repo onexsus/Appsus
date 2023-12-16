@@ -9,65 +9,7 @@ export const storageService = {
     remove,
 }
 
-const defaultNotes = [
-    {
-        id: utilService.makeId(),
-        type: 'NoteTxt',
-        isPinned: false,
-        style: {},
-        info: {
-            title: 'Text Note',
-            txt: 'This is a default text note'
-        }
-    },
-    {
-        id: utilService.makeId(),
-        type: 'NoteImg',
-        isPinned: false,
-        style: {},
-        info: {
-            title: 'Image Note',
-            url: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png'
-        }
-    },
-    {
-        id: utilService.makeId(),
-        type: 'NoteVideo',
-        isPinned: false,
-        style: {},
-        info: {
-            title: 'Video Note',
-            url: 'https://www.youtube.com/watch?v=RXj8Eq5h7hE'
-        }
-    },
-    {
-        id: utilService.makeId(),
-        type: 'NoteTodos',
-        isPinned: false,
-        style: {},
-        info: {
-            title: 'Todo Note',
-            todos: [
-                { txt: 'First task', doneAt: null },
-                { txt: 'Second task', doneAt: null }
-            ]
-        }
-    }
-]
-
-function initDefaultData() {
-    let entities = JSON.parse(localStorage.getItem('noteDB')) || [];
-    if (!entities.length) {
-        defaultNotes.forEach(note => {
-            note.id = note.id || _makeId();
-            entities.push(note);
-        });
-        _save('noteDB', entities);
-    }
-}
-
 function query(entityType, delay = 500) {
-    initDefaultData();  // Initialize default data if needed
     var entities = JSON.parse(localStorage.getItem(entityType)) || [];
     return new Promise(resolve => setTimeout(() => resolve(entities), delay));
 }

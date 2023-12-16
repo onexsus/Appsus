@@ -11,14 +11,14 @@ export function NoteIndex() {
     const [notes, setNotes] = useState([])
 
     useEffect(() => {
-        fetchNotes()
-    }, [])
+        noteService.initDefaultData().then(fetchNotes);
+    }, []);
 
     const fetchNotes = () => {
         noteService.query({}).then(fetchedNotes => {
-            setNotes(fetchedNotes)
-        })
-    }
+            setNotes(fetchedNotes);
+        });
+    };
 
     const handleNoteAdded = (newNote) => {
         storageService.post('noteDB', newNote).then(savedNote => {

@@ -6,6 +6,8 @@ import { storageService } from '../../../services/async-storage.service.js';
 
 export function NoteList({ notes, onNoteChange }) {
 
+    console.log("Notes in NoteList:", notes); // Log the notes array
+
     const handleDuplicateNote = (duplicatedNote, originalNoteId) => {
         storageService.post('noteDB', duplicatedNote).then((newDuplicatedNote) => {
             const originalNoteIndex = notes.findIndex(note => note.id === originalNoteId);
