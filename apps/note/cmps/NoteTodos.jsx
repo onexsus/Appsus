@@ -19,12 +19,16 @@ export function NoteTodos({ note, onNoteChange }) {
     const toggleTodoDone = (idx) => {
         const updatedTodos = note.info.todos.map((todo, index) => {
             if (idx === index) {
-                return { ...todo, doneAt: todo.doneAt ? null : new Date().toISOString() };
+                return {
+                    ...todo,
+                    doneAt: todo.doneAt ? null : Date.now() // Store as timestamp
+                };
             }
             return todo;
         });
         onNoteChange({ ...note, info: { ...note.info, todos: updatedTodos } });
     };
+
 
     const removeTodo = (idx, event) => {
         event.stopPropagation()
