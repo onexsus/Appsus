@@ -8,6 +8,7 @@ export function MailList({
   onUpdateStared,
   onUpdateRead,
   onOpenMail,
+  onDeleteEmail,
 }) {
   return (
     <section className="main-list">
@@ -22,6 +23,7 @@ export function MailList({
                   onUpdateRead={onUpdateRead}
                   onUpdateStared={onUpdateStared}
                   onOpenMail={onOpenMail}
+                  onDeleteEmail={onDeleteEmail}
                 />
               </li>
              {email.isOpen&& <li className="email-details-contienr">

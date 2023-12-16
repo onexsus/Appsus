@@ -2,7 +2,7 @@ const { Fragment, useState } = React;
 const { Link } = ReactRouterDOM;
 
 import { utilService } from "../../../services/util.service.js";
-export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRead,onOpenMail}) {
+export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRead,onOpenMail,onDeleteEmail}) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const date = new Date(email.sentAt);
@@ -68,8 +68,15 @@ export function EmailPreview({email ,onRemoveToTrash ,onUpdateStared,onUpdateRea
               className="email-btn"
               onClick={() => onRemoveToTrash(email.id)}
             >
-              <i className="fa-solid fa-trash-can"></i>
+             {email.removedAt===null&& <i className="fa-solid fa-trash-can"></i>}
+             {email.removedAt!==null&& <i className="fa-solid fa-trash-can-arrow-up"></i>}
             </button>
+            {email.removedAt !==null &&<button
+              className="email-btn"
+              onClick={() => onDeleteEmail(email.id)}
+            >
+           <i className="fa-solid fa-trash-can"></i>
+            </button>}
           </div>
         )}
       </article>
