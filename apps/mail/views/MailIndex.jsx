@@ -2,6 +2,7 @@ import { emailService } from "../services/mail.service.js";
 import {MailList} from "../cmps/MailList.jsx"
 import {EmailHeader} from "../cmps/EmailHeader.jsx"
 import {EmailFolderList} from "../cmps/EmailFolderList.jsx"
+import {EmailCreate} from "../cmps/EmailCreate.jsx"
 import {EmailSort} from "../cmps/EmailSort.jsx"
 import {EmailFooter} from "../cmps/EmailFooter.jsx"
 import {showSuccessMsg} from "../../../services/event-bus.service.js"
@@ -16,6 +17,7 @@ export function MailIndex() {
   // const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter());
   const [filterBy, setFilterBy] = useState(params);
   const [isHover, setIsHover] = useState(false);
+  const [isOpenNewMail, setOpenNewMail] = useState(false);
 
   console.log(params.status);
   console.log(filterBy);
@@ -37,8 +39,22 @@ export function MailIndex() {
       .then((emails) => setEmails(emails))
       .catch((err) => console.log("err:", err));
   }
-  function onAddEmail(){
+  function onCreateMail(from,to,subject,content,isSent){
+    console.log(from,to,subject,content,isSent)
+    emailService.createMail(from,to,subject,content,isSent).then((newMail)=>{
+      console.log(newMail)
+      setEmails(prevMails => {prevMails.unshift(newMail)
+      return prevMails})
+      onOpenNewMail()
+      showSuccessMsg(`Email successfully add mail! ${newMail.id}`)
+    }
+
+    )
      
+  }
+
+  function onOpenNewMail(){
+    setOpenNewMail(!isOpenNewMail)
   }
   function onSetStatus(prop){
     emailService.setStatus(prop).then(
@@ -96,6 +112,7 @@ export function MailIndex() {
       .catch((err) => console.log("err:", err));
   }
   let openNav= isHover ? 'open-nav' : ' '
+  let openNewMail= isOpenNewMail ? 'open-new-mail' : ' '
 
   if (!emails) return <div>Loading...</div>;
   return(
@@ -105,12 +122,15 @@ export function MailIndex() {
       </div>
          <div className="nav-side-continer" onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}>
-        <EmailFolderList onSetStatus={onSetStatus}/>
+        <EmailFolderList onSetStatus={onSetStatus} onOpenNewMail={onOpenNewMail}/>
          </div>
         <div className="main-mail-list-continer" >
         <EmailSort/>
         <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onUpdateRead={onUpdateRead} onUpdateStared={onUpdateStared} onOpenMail={onOpenMail}
         onDeleteEmail={onDeleteEmail}/>
+        </div>
+        <div className={"main-new-mail-continer " +openNewMail}>
+        <EmailCreate onCreateMail={onCreateMail}/>
         </div>
         <EmailFooter/>
     </section>

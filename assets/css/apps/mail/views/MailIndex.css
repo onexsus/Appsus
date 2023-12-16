@@ -28,3 +28,20 @@
   grid-row: 2;
   grid-column: 2;
  }
+
+.main-new-mail-continer{
+  display: none;
+  position: absolute;
+  
+  width: 250px;
+  background-color: antiquewhite;
+  padding: 15px;
+  border: 1px solid black;
+}
+
+ .open-new-mail{
+  display: block;
+  position: absolute;
+  bottom: 200px;
+  left: 60px;
+ }
