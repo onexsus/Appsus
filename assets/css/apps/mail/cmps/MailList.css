@@ -3,6 +3,8 @@
  .main-list{
    display: grid;
    grid-template-columns: 1fr;
+   /* height: 440px; */
+   height: 100%;
   }
   .email-list{
     background-color: #fff;

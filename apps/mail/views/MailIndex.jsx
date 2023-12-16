@@ -2,6 +2,8 @@ import { emailService } from "../services/mail.service.js";
 import {MailList} from "../cmps/MailList.jsx"
 import {EmailHeader} from "../cmps/EmailHeader.jsx"
 import {EmailFolderList} from "../cmps/EmailFolderList.jsx"
+import {EmailSort} from "../cmps/EmailSort.jsx"
+import {EmailFooter} from "../cmps/EmailFooter.jsx"
 import {showSuccessMsg} from "../../../services/event-bus.service.js"
 
 const { useState, useEffect } = React;
@@ -98,15 +100,19 @@ export function MailIndex() {
   if (!emails) return <div>Loading...</div>;
   return(
     <section className={"email-main-continer " +openNav}>
-         <div onMouseEnter={() => setIsHover(true)}
+      <div className="main-header-email-continer  flex align-center" >
+          <EmailHeader/>
+      </div>
+         <div className="nav-side-continer" onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}>
         <EmailFolderList onSetStatus={onSetStatus}/>
          </div>
-        <div>
-        <EmailHeader/>
+        <div className="main-mail-list-continer" >
+        <EmailSort/>
         <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onUpdateRead={onUpdateRead} onUpdateStared={onUpdateStared} onOpenMail={onOpenMail}
         onDeleteEmail={onDeleteEmail}/>
         </div>
+        <EmailFooter/>
     </section>
 
 

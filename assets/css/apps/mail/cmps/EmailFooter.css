@@ -1,0 +1,23 @@
+
+/* main-footer
+footer-logo
+footer-content
+footer-links */
+
+.main-footer{
+  grid-column: 1/-1;
+  width: 100%;
+  /* height: 100px; */
+  background-color: #eaf1fb;
+}
+.footer-logo{
+  margin-top: 1em;
+  width: 160px;
+}
+.footer-logo img{
+  width: 100%;
+}
+
+.footer-content{
+  font-size: 1.2rem;
+}
