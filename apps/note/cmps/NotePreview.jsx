@@ -1,16 +1,15 @@
 // NotePreview.jsx
 
+
 import { NoteTxt } from './NoteTxt.jsx'
 import { NoteImg } from './NoteImg.jsx'
 import { NoteVideo } from './NoteVideo.jsx'
 import { NoteTodos } from './NoteTodos.jsx'
 
-import { utilService } from '../../../services/util.service.js'; // Ensure you import this
-
 const { useState } = React;
 const { useNavigate, useLocation } = ReactRouterDOM;
 
-export function NotePreview({ note, onNoteChange, onRemoveNote, onDuplicateNote }) {
+export function NotePreview({ note, onNoteChange, onNoteUpdate, onRemoveNote, onDuplicateNote }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedNote, setEditedNote] = useState({ ...note });
     const navigate = useNavigate();
@@ -47,6 +46,10 @@ export function NotePreview({ note, onNoteChange, onRemoveNote, onDuplicateNote 
         onDuplicateNote(duplicatedNote, note.id);
     };
 
+    const handlePinToggle = () => {
+        const updatedNote = { ...note, isPinned: !note.isPinned };
+        onNoteUpdate(updatedNote);
+    };
 
     return (
         <article className="note-preview">
@@ -74,8 +77,8 @@ export function NotePreview({ note, onNoteChange, onRemoveNote, onDuplicateNote 
                     {NoteComponent ? <NoteComponent note={note} onNoteChange={onNoteChange} /> : null}
                     <button onClick={handleEdit}>Edit</button>
                     <button onClick={() => onRemoveNote(note.id)}>Remove</button>
-                    <button onClick={handleDuplicate}>Duplicate</button> {/* Duplicate button */}
-                    <button disabled>Pin note</button>
+                    <button onClick={handleDuplicate}>Duplicate</button>
+                    <button onClick={handlePinToggle}>{note.isPinned ? 'Unpin' : 'Pin'}</button>
                     <button disabled>Select note color</button>
                     <button disabled>Send note as email</button>
                 </div>

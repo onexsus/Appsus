@@ -106,7 +106,10 @@ function remove(noteId) {
 
 function save(note) {
     const action = note.id ? storageService.put(NOTE_KEY, note) : storageService.post(NOTE_KEY, note);
-    return action.then(() => query());
+    return action.then(() => query()).then(notes => {
+        // Sort notes to bring pinned notes to the top
+        return notes.sort((a, b) => (b.isPinned ? 1 : 0) - (a.isPinned ? 1 : 0));
+    });
 }
 
 function getEmptyNote() {

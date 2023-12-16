@@ -22,15 +22,21 @@ export function NoteIndex() {
 
     const handleNoteAdded = (newNote) => {
         storageService.post('noteDB', newNote).then(savedNote => {
-            setNotes(prevNotes => [savedNote, ...prevNotes])
-        })
-    }
+            setNotes(prevNotes => [...prevNotes, savedNote]);
+        });
+    };
+
+    const handleNoteUpdate = (updatedNote) => {
+        noteService.save(updatedNote).then(updatedNotes => {
+            setNotes(updatedNotes);
+        });
+    };
 
     return (
         <div>
             <h1>Note app</h1>
             <NoteCreate onNoteAdded={handleNoteAdded} />
-            <NoteList notes={notes} onNoteChange={setNotes} />
+            <NoteList notes={notes} onNoteChange={setNotes} onNoteUpdate={handleNoteUpdate} />
         </div>
     )
 }
