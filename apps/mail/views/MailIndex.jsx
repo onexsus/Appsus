@@ -21,10 +21,13 @@ export function MailIndex() {
     
   
   
-  
   useEffect(() => {
     loadEmails();
-  }, [filterBy,params.status]);
+  }, [filterBy]);
+
+  useEffect(()=>{
+  setFilterBy(params)
+},[params.status])
   console.log(emails)
 
   function loadEmails() {
@@ -34,6 +37,14 @@ export function MailIndex() {
   }
   function onAddEmail(){
      
+  }
+  function onSetStatus(prop){
+    emailService.setStatus(prop).then(
+      (status)=> {
+        console.log(status)
+        setParmas(status)}
+    )
+    // setParmas(params.status=prop)
   }
   function onUpdateStared(emailId){
     console.log(emailId)
@@ -83,15 +94,13 @@ export function MailIndex() {
       .catch((err) => console.log("err:", err));
   }
   let openNav= isHover ? 'open-nav' : ' '
-  // let openNav= ' '
-  console.log(openNav)
 
   if (!emails) return <div>Loading...</div>;
   return(
     <section className={"email-main-continer " +openNav}>
          <div onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}>
-        <EmailFolderList />
+        <EmailFolderList onSetStatus={onSetStatus}/>
          </div>
         <div>
         <EmailHeader/>

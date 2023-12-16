@@ -12,6 +12,7 @@ export const emailService = {
   updateStared,
   updateOpen,
   deleteEmail,
+  setStatus,
   
 }
 
@@ -33,6 +34,10 @@ const loggedinUser = {
 };
 
 _createEmails()
+
+function setStatus(prop){
+  return  Promise.resolve({status:prop})
+}
 
 function updateOpen(emailId){
   return storageService.get(EMAILS_KEY,emailId).then((email)=>{

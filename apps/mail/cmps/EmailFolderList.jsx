@@ -1,6 +1,6 @@
 const { useState, useEffect } = React;
 
-export function EmailFolderList({ filterBy, onSetFilter }) {
+export function EmailFolderList({ filterBy, onSetFilter,onSetStatus }) {
   return (
     
     // <nav className="filter-continer flex column side-bar">
@@ -32,7 +32,7 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
           <hr/>
           <li>
             
-             <button className="flex align-center">
+             <button onClick={() => onSetStatus("index") }className="flex align-center">
               <div className="nav-content-bar flex align-center  align-center" >
               <i className="fa fa-solid fa-inbox"></i>
               <span className="nav-text">Inxbox</span>
@@ -42,7 +42,7 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
           </li>
           <li>
             
-             <button className="flex align-center">
+             <button onClick={() => onSetStatus("important") } className="flex align-center">
               <div className="nav-content-bar flex align-center  align-center" >
               <i className="fa fa-solid fa-star"></i>
               <span className="nav-text">Important</span>
@@ -52,7 +52,7 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
           </li>
           <li >
             
-             <button className="flex align-center">
+             <button onClick={() => onSetStatus("sent") } className="flex align-center">
               <div className="nav-content-bar flex align-center  align-center" >
               <i className="fa fa-solid fa-share-from-square"></i>
               <span className="nav-text">Sent</span>
@@ -63,7 +63,7 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
 
           <li >
             
-             <button className="flex align-center">
+             <button onClick={() => onSetStatus("draft") } className="flex align-center">
               <div className="nav-content-bar flex align-center  align-center" >
               <i className="fa fa-solid fa-file"></i>
               <span className="nav-text">Draft</span>
@@ -73,7 +73,7 @@ export function EmailFolderList({ filterBy, onSetFilter }) {
           </li>
           <li >
             
-             <button className="flex align-center ">
+             <button onClick={() => onSetStatus("trash") } className="flex align-center ">
               <div className="nav-content-bar flex align-center  align-center" >
               <i className="fa fa-trash-can "></i>
               <span className="nav-text">Trash</span>
