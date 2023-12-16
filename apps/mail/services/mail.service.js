@@ -86,9 +86,8 @@ function getDefaultFilter(){
 }
 
 
-function query(gFilterBy) {
+function query(gFilterBy,sortBy) {
   return storageService.query(EMAILS_KEY).then(emails=>{
-    console.log(emails)
     if (gFilterBy.status=== "index") {
       emails = emails.filter(
         (email) => {if(email.from !== loggedinUser.email && email.removedAt ===null && email.sentAt !==null) return email
@@ -128,9 +127,32 @@ function query(gFilterBy) {
         );
         console.log(emails,'trash')
       }
+      console.log(emails)
+      console.log(sortBy)
+      emails= emailsSort(emails,sortBy)
+      console.log(emails)
       return Promise.resolve(emails)
   }
   )     
+}
+
+function emailsSort(emails,sort){
+  if(sort==='Read'){
+    emails=emails.filter((email)=>{
+      if(email.isRead===true) return email
+    })
+  }
+  if(sort==='Unread'){
+    emails=emails.filter((email)=>{
+      if(email.isRead!==true) return email
+    })
+  }
+  if(sort==='Date'){
+    emails=emails.sort((email1,email2)=>email2.sentAt-email1.sentAt)
+  }
+
+  return emails
+
 }
 // function query(gFilterBy) {
 //   return storageService.query(EMAILS_KEY).then(emails=>{

@@ -14,7 +14,7 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 export function MailIndex() {
   const [emails, setEmails] = useState(null);
   const [params, setParmas] = useState({status:'index'});
-  // const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter());
+  const [sortBy, setSortBy] = useState('date');
   const [filterBy, setFilterBy] = useState(params);
   const [isHover, setIsHover] = useState(false);
   const [isOpenNewMail, setOpenNewMail] = useState(false);
@@ -27,7 +27,7 @@ export function MailIndex() {
   
   useEffect(() => {
     loadEmails();
-  }, [filterBy]);
+  }, [filterBy,sortBy]);
 
   useEffect(()=>{
   setFilterBy(params)
@@ -35,7 +35,7 @@ export function MailIndex() {
   console.log(emails)
 
   function loadEmails() {
-    emailService.query(filterBy)
+    emailService.query(filterBy,sortBy)
       .then((emails) => setEmails(emails))
       .catch((err) => console.log("err:", err));
   }
@@ -51,6 +51,9 @@ export function MailIndex() {
 
     )
      
+  }
+  function onSetSortBy(sort){
+      setSortBy(sort)
   }
 
   function onOpenNewMail(){
@@ -125,7 +128,7 @@ export function MailIndex() {
         <EmailFolderList onSetStatus={onSetStatus} onOpenNewMail={onOpenNewMail}/>
          </div>
         <div className="main-mail-list-continer" >
-        <EmailSort/>
+        <EmailSort onSetSortBy={onSetSortBy}/>
         <MailList emails={emails} onRemoveToTrash={onRemoveToTrash} onUpdateRead={onUpdateRead} onUpdateStared={onUpdateStared} onOpenMail={onOpenMail}
         onDeleteEmail={onDeleteEmail}/>
         </div>
