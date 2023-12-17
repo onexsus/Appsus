@@ -20,12 +20,12 @@ export function About() {
         </p>
         <h2>Our Team</h2>
         <div className="team-member">
-            <div className="team-avatar"><img src="../assets/img/hacker.png"/></div>
+            <div className="team-avatar"><img src="../assets/img/hacker.jpg"/></div>
           <h3>Boris</h3>
           <p>It's wonderful to hear about Boris's contribution to the world of mail applications! Boris, through his dedication and expertise, has created an exceptional mail app that redefines how users interact with their emails. This application is a testament to Boris's commitment to simplifying communication and enhancing productivity. With an intuitive interface and innovative features, Boris's mail app promises to streamline inboxes and offer a seamless user experience. It's exciting to see individuals like Boris making significant strides in the tech world with their remarkable creations.</p>
         </div>
         <div className="team-member">
-            <div className="team-avatar"><img src="../assets/img/man.png"/></div>
+            <div className="team-avatar"><img src="../assets/img/man.jpg"/></div>
           <h3>Konstantin </h3>
           <p>Konstantin's dedication to creating a notes application has led to an incredible innovation in the realm of digital note-taking. His application stands as a testament to his passion for enhancing productivity and creativity. Konstantin's notes app is designed with precision, offering an intuitive interface and powerful features that cater to organizing thoughts and ideas efficiently. Through his expertise and commitment to user-centric design, Konstantin has crafted a note-taking experience that is set to transform the way users capture and manage their thoughts seamlessly. It's inspiring to witness individuals like Konstantin contributing to the tech landscape with their remarkable creations.</p>
         </div>
