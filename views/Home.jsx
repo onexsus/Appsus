@@ -17,11 +17,11 @@ export function Home() {
         </p>
        <div className="link-btn">
         <Link to="/mail">
-            <div className='btn-logo-app bk-logo'><img src="../assets/img/bkmail-logo.png"/></div>
+            <div className='btn-logo-app bk-logo'><img src="../assets/img/bkmail-logo.jpg"/></div>
         </Link>
         <Link to="/note">
             <div className='btn-logo-app'>
-            <img src="../assets/img/note-logo.png"/>
+            <img src="../assets/img/note-logo.jpg"/>
             </div>
 
         </Link>
@@ -31,7 +31,7 @@ export function Home() {
       <div className="services-cards flex ">
         <div className="service-card flex column space-between align-center">
           <div className="service-card-img">
-            <img src="../assets/img/icons-app-store.png" />
+            <img src="../assets/img/icons-app-store.jpg" />
           </div>
           <h3 className="service-card-title">Top 10 App</h3>
           <div className="service-card-text">
@@ -40,7 +40,7 @@ export function Home() {
         </div>
         <div className="service-card flex column space-between align-center">
           <div className="service-card-img ">
-            <img src="../assets/img/icons-rating.png" />
+            <img src="../assets/img/icons-rating.jpg" />
           </div>
           <h3 className="service-card-title">App Rating</h3>
           <div className="service-card-text">
@@ -49,7 +49,7 @@ export function Home() {
         </div>
         <div className="service-card flex column  align-center space-between">
           <div className="service-card-img ">
-            <img src="../assets/img/icons-users.png" />
+            <img src="../assets/img/icons-users.jpg" />
           </div>
           <h3 className="service-card-title">+100K<br/> Users</h3>
           <div className="service-card-text">
@@ -58,7 +58,7 @@ export function Home() {
         </div>
         <div className="service-card flex column space-between align-center service-card-apps">
           <div className="service-card-img">
-            <img src="../assets/img/icons-apps.png" />
+            <img src="../assets/img/icons-apps.jpg" />
           </div>
           <h3 className="service-card-title">Appsus</h3>
           <div className="service-card-text">
@@ -67,7 +67,7 @@ export function Home() {
         </div>
         <div className="service-card flex column space-between align-center">
           <div className="service-card-img">
-            <img src="../assets/img/icon-service.png" />
+            <img src="../assets/img/icon-service.jpg" />
           </div>
           <h3 className="service-card-title">24/7<br/>Support</h3>
           <div className="service-card-text">
