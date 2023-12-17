@@ -6,7 +6,7 @@
 
  .bg-image {
 
-  background-image: url("../../img/background-appsus.jpg");
+  background-image: url("./../../img/background-appsus.jpg");
   
   filter: blur(2px);
   
