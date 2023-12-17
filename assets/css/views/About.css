@@ -1,0 +1,56 @@
+
+
+.about{
+  height: 1100px;
+  width: 100%;
+  margin-bottom: -200px;
+}
+
+.about-continer img{
+  width: 100%;
+}
+
+.bg-image-about {
+
+  background-image: url("../../img/about-team-bg.jpg");
+  
+  filter: blur(2px);
+  
+  height: 100%; 
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.about-section{
+  color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.664); 
+  font-weight: 600;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+.about-section h1{
+  font-size: 1.8em;
+}
+.about-section p{
+  font-size: 1.2em;
+  margin-bottom: 1.2em;
+}
+.team-member{
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.team-avatar{
+  width: 120px;
+}
+.team-avatar img{
+  width: 100%;
+}
