@@ -59,6 +59,9 @@
 .hero-section .btn-logo-app:hover{
   background-color: rgb(253, 245, 185);
 }
+.btn-logo-app{
+  width: 120px;
+}
 .btn-logo-app img{
   width: 100%;
 }
