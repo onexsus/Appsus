@@ -7,7 +7,7 @@ export function EmailHeader({onToggleMenu}){
       <div className="flex align-center header-menu-mails">
 
       <button onClick={onToggleMenu} className="btn-header-menu"> <i className="fa-solid fa-bars "></i> </button>
-       <div className="email-logo"><img src="./../../../assets/img/bkmail-logo.jpg" alt="mail-logo" /></div>
+       <div className="email-logo"><img src="assets/img/bkmail-logo.png" alt="mail-logo" /></div>
 
        <form className="header-form flex align-center" action="">
         <button className="btn-search-mail"><i className="fa-solid fa-magnifying-glass icon-search-mail"></i></button>
