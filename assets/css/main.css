@@ -20,13 +20,18 @@
 
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
+@import './cmps/AppFooter.css';
 
 @import './apps/mail/cmps/MailList.css';
 @import './apps/mail/cmps/EmailHeader.css';
 @import './apps/mail/cmps/EmailFolderList.css';
 @import './apps/mail/cmps/EmailSort.css';
 @import './apps/mail/cmps/EmailDetails.css';
+@import './apps/mail/cmps/EmailCreate.css';
 @import './apps/mail/cmps/EmailFooter.css';
 
 @import '../css/apps/note/cmps/NoteList.css';
 @import '../css/apps/note/cmps/NoteTodos.css';
+
+
+@import './setup/mq.css';

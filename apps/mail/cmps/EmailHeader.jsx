@@ -1,11 +1,12 @@
 
 
-export function EmailHeader(){
+export function EmailHeader({onToggleMenu}){
+  
   return (
     <section className="email-header flex align-center space-between">
-      <div className="flex align-center">
+      <div className="flex align-center header-menu-mails">
 
-      <button className="btn-header-menu"> <i className="fa-solid fa-bars "></i> </button>
+      <button onClick={onToggleMenu} className="btn-header-menu"> <i className="fa-solid fa-bars "></i> </button>
        <div className="email-logo"><img src="../../../assets/img/bkmail-logo.png" alt="mail-logo" /></div>
 
        <form className="header-form flex align-center" action="">

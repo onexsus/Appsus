@@ -18,6 +18,7 @@ export function MailIndex() {
   const [filterBy, setFilterBy] = useState(params);
   const [isHover, setIsHover] = useState(false);
   const [isOpenNewMail, setOpenNewMail] = useState(false);
+  const [isOpenMenu, setOpenMenu] = useState(false);
 
   console.log(params.status);
   console.log(filterBy);
@@ -51,6 +52,9 @@ export function MailIndex() {
 
     )
      
+  }
+  function onToggleMenu(){
+    setOpenMenu(!isOpenMenu)
   }
   function onSetSortBy(sort){
       setSortBy(sort)
@@ -114,18 +118,21 @@ export function MailIndex() {
       })
       .catch((err) => console.log("err:", err));
   }
-  let openNav= isHover ? 'open-nav' : ' '
+  
+  let openNav= isHover ? 'open-nav ' : ' '
   let openNewMail= isOpenNewMail ? 'open-new-mail' : ' '
+  let openToggleMenuCS= isOpenMenu ? ' ToggleMenu ' : ' '
+  
 
   if (!emails) return <div>Loading...</div>;
   return(
-    <section className={"email-main-continer " +openNav}>
+    <section className={" email-main-continer " +openNav +openToggleMenuCS}>
       <div className="main-header-email-continer  flex align-center" >
-          <EmailHeader/>
+          <EmailHeader onToggleMenu={onToggleMenu}/>
       </div>
          <div className="nav-side-continer" onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}>
-        <EmailFolderList onSetStatus={onSetStatus} onOpenNewMail={onOpenNewMail}/>
+        <EmailFolderList onSetStatus={onSetStatus} onOpenNewMail={onOpenNewMail} isOpenMenu={isOpenMenu} />
          </div>
         <div className="main-mail-list-continer" >
         <EmailSort onSetSortBy={onSetSortBy}/>
@@ -133,7 +140,7 @@ export function MailIndex() {
         onDeleteEmail={onDeleteEmail}/>
         </div>
         <div className={"main-new-mail-continer " +openNewMail}>
-        <EmailCreate onCreateMail={onCreateMail}/>
+        <EmailCreate onOpenNewMail={onOpenNewMail} onCreateMail={onCreateMail}/>
         </div>
         <EmailFooter/>
     </section>

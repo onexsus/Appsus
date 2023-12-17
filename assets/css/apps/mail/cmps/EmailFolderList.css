@@ -152,8 +152,8 @@ box-shadow:         inset 0px 5px 5px -4px rgba(50, 50, 50, 0.55);
 
 
 
-
 /* 
+
 .area {
 float: left;
 background: #e2e2e2;
@@ -180,3 +180,10 @@ height: 100%;
 .nav-content-bar i{
   padding-bottom: 5px;
 }
+
+.toggle-nav{
+  width:200px;
+  overflow:hidden;
+  opacity:1;
+  
+  }

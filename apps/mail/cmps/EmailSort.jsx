@@ -6,7 +6,7 @@ export function EmailSort({onSetSortBy}){
     onSetSortBy(event.target.value);
   }
    return(
-    <section className="email-sort-continer flex">
+    <section className="email-sort-continer flex align-center">
     <div>Sort :</div>
       <select onChange={handleSortChange}>
         <option>Date</option>

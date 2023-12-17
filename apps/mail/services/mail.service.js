@@ -15,6 +15,7 @@ export const emailService = {
   setStatus,
   createMail,
   
+  
 }
 
 const criteria = {
@@ -154,6 +155,50 @@ function emailsSort(emails,sort){
   return emails
 
 }
+
+// function getNumOf(filter){
+//   return storageService.query(EMAILS_KEY).then(emails=>{
+//     if (filter=== "index") {
+//       emails = emails.filter(
+//         (email) => {if(email.from !== loggedinUser.email && email.removedAt ===null && email.sentAt !==null) return email
+//         }
+//         );
+//     }
+//     if (filter=== "sent") {
+//       emails = emails.filter(
+//         (email) => {
+//           if(email.from === loggedinUser.email && email.removedAt ===null && email.sentAt !==null) return email
+//         } 
+//         );
+//       }
+//     if (filter=== "draft") {
+//       emails = emails.filter(
+//         (email) => {
+//           if(email.sentAt === null && email.removedAt ===null ) return email
+//         } 
+//         );
+//         console.log(emails,'draft')
+//       }
+//     if (filter=== "important") {
+//       emails = emails.filter(
+//         (email) => {
+//           if(email.isStared === true && email.removedAt ===null) return email
+//         } 
+//         );
+//       }
+//     if (filter=== "trash") {
+//       emails = emails.filter(
+//         (email) => {
+//           if(email.removedAt !== null) return email
+//         } 
+//         );
+//       }
+//       let num=emails.length
+//       if(num) return num
+//       return num=0
+//   }
+//   )     
+// }
 // function query(gFilterBy) {
 //   return storageService.query(EMAILS_KEY).then(emails=>{
 //     console.log(emails)

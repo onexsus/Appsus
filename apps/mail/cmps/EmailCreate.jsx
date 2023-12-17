@@ -1,7 +1,7 @@
 import {emailService} from '../services/mail.service.js'
 
 
-export function EmailCreate({onCreateMail}){
+export function EmailCreate({onCreateMail,onOpenNewMail}){
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -22,13 +22,25 @@ export function EmailCreate({onCreateMail}){
 };
   return(
     <section className="new-mail-continer">
+         <div className="new-mail-header flex space-between">
+          <div className="new-mail-title">New Mail</div>
+          <button className="btn-close" onClick={() => onOpenNewMail()}>
+          <i className="fa-regular fa-circle-xmark close-icon"></i>
+          </button>
+         </div>
         <form onSubmit={handleSubmit}>
-          <div className="new-mail-from"> From : <input type="text" placeholder="Enter Email" name="from"/></div>
-          <div className="new-mail-to"> To : <input type="text" placeholder="Enter Email "  name="to"/></div>
-          <div className="new-mail-sucject"> Subject : <input type="text" placeholder="Enter subject " name="subject"/></div>
-          <div className="new-mail-content">Content : <input type="text" name="content" /></div>
-          <div className="btns"></div>
+          <div className="new-mail-from  flex space-between"> From : <input type="text" placeholder="Enter Email" name="from"/></div>
+          <div className="new-mail-to  flex space-between"> To : <input type="text" placeholder="Enter Email "  name="to"/></div>
+          <div className="new-mail-sucject  flex space-between"> Subject : <input type="text" placeholder="Enter subject " name="subject"/></div>
+          <div className="new-mail-content-continer"><div    new-mail-content-title>
+            Content : 
+            </div>
+            <div className="new-mail-content">
+            <textarea type="text" name="content" /></div>
+            </div>
+          <div className="btns-new-mail flex">
           <button className="btn-new-mail-sent">Sent</button>
+          </div>
         </form>
 
     </section>

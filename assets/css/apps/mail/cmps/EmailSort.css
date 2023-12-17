@@ -2,5 +2,10 @@
 
 .email-sort-continer{
   background-color: #fff;
-  height: 77.5px;
+  height: 58px;
+  padding: 10px;
+  font-size: 1.3rem;
+}
+.email-sort-continer select{
+  font-size: 0.8rem;
 }

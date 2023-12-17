@@ -1,0 +1,24 @@
+
+
+.app-footer{
+  margin-top: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 150px;
+  background: rgb(243, 208, 132);
+  border-top: 2px solid rgb(0, 0, 0);
+}
+
+.app-footer-logo{
+  padding-top: 30px;
+  height: 40px;
+  margin-bottom: 1.5rem;
+}
+.app-footer-logo img{
+  width: 100%;
+}
+
+.app-footer-content{
+ font-size: 1.2rem;
+}

@@ -73,6 +73,9 @@
 .email-btn:hover{
   background-color:#c4c7c5 ;
 }
+.fa-solid.fa-star.email-btn{
+  color:rgb(211, 211, 33) ;
+}
 /* 
 email-title
 email-body

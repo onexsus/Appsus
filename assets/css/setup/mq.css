@@ -1,0 +1,78 @@
+@media (max-width: 860px){
+  .services-cards{
+    height:200px;
+    width: 100%;
+  }
+  .services-cards .service-card-title{
+    font-size: 1em;
+  }
+  .services-cards .service-card-text{
+    font-size: 0.8em;
+  }
+  .app-footer{
+    margin-top: 200px;
+  }
+  .service-card-apps{
+    display: none;
+  }
+
+}
+
+@media (max-width: 650px){
+  .email-main-continer{
+    margin-top: 27.5px;
+    margin-bottom: 0;
+    display: grid;
+    grid-template-rows: 110px 1fr;
+    width: 100%;
+   }
+   .main-header-email-continer{
+    grid-column: 1/-1;
+    grid-row: 1;
+    height: 60px;
+   }
+   .email-header{
+    width: 100%;
+    flex-direction: column;
+  }
+  .user-continer{
+    align-self: flex-end;
+  }
+  .header-menu-mails{
+    align-self: self-start;
+  }
+  .header-menu-mails form input{
+    max-width:150px ;
+  }
+
+
+}
+
+@media (max-width: 500px){
+  
+  .user-continer{
+    align-self: flex-start;
+  }
+  .main-list{
+    /* max-width:340px ; */
+  }
+  .email-continer{
+    
+    display: grid;
+    grid-template-columns:20px 20px 100px 30px 60px;
+    gap: 10px;
+    font-size: 1.2rem;
+    height: 40px;
+    text-align: start;
+    align-items: center;
+    padding-right: 10px;
+   
+} 
+  .email-body{
+    display: none;
+  }
+  .email-subject{
+    display: none;
+  }
+
+}
